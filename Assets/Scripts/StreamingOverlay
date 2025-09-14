@@ -1,0 +1,31 @@
+using UnityEngine;
+
+public class CreeperBoss : MonoBehaviour
+{
+    public float approachSpeed = 2f;
+    public GameObject player;
+    public float explodeDistance = 2f;
+    public GameObject explosionPrefab;
+
+    bool triggered = false;
+
+    void Update()
+    {
+        if (!triggered && Vector3.Distance(transform.position, player.transform.position) < explodeDistance)
+        {
+            triggered = true;
+            Explode();
+        }
+        else if (!triggered)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, approachSpeed * Time.deltaTime);
+        }
+    }
+
+    void Explode()
+    {
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        // Damage player (placeholder)
+        Destroy(gameObject);
+    }
+}
