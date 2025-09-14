@@ -1,0 +1,26 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance;
+    public string currentWorld = "Apartment";
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public void SwitchWorld(string worldName)
+    {
+        currentWorld = worldName;
+        SceneManager.LoadScene(worldName);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+}
