@@ -1,0 +1,28 @@
+using UnityEngine;
+using TMPro;
+
+public class StreamingOverlay : MonoBehaviour
+{
+    public TextMeshProUGUI chatText;
+    string[] chatLines = {
+        "Chat: NATHAN IS LIVE!",
+        "PogChamp!!!",
+        "Did he just fall into Minecraft?",
+        "Bruh this is real??",
+        "Creeper behind you Nathan!",
+        "Press R for Remote!"
+    };
+    int currentLine = 0;
+    float timer = 0f;
+    public float chatInterval = 2f;
+
+    void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer > chatInterval && currentLine < chatLines.Length)
+        {
+            chatText.text += "\n" + chatLines[currentLine++];
+            timer = 0f;
+        }
+    }
+}
