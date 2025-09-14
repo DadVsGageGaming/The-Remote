@@ -1,0 +1,28 @@
+using UnityEngine;
+
+public class RemoteController : MonoBehaviour
+{
+    public GameObject remoteUI;
+    public AudioClip activateSfx;
+
+    public void ActivateRemote()
+    {
+        remoteUI.SetActive(true);
+        if (activateSfx) AudioSource.PlayClipAtPoint(activateSfx, Camera.main.transform.position);
+    }
+
+    public void SwitchToWorld(string worldName)
+    {
+        remoteUI.SetActive(false);
+        GameManager.Instance.SwitchWorld(worldName);
+    }
+
+    void Update()
+    {
+        // Example: press R to activate remote
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ActivateRemote();
+        }
+    }
+}
